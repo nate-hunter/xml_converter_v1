@@ -1,9 +1,5 @@
 import lxml.etree as etree
 
-# A project to to convert multiple XML files into a single CSV sheet.
-
-# file_path = 'C:\\Users\\laway\\Desktop\\iNDEMAND\\misc\\py_projects\\xml_to_csv\\files\\Ax Men S10 - A&E\\'
-
 file_path = 'C:\\Users\\laway\\Desktop\\iNDEMAND\\misc\\py_projects\\xml_to_csv\\project_repos\\xml_converter_v1\\xml_files\\'
 file_to_parse = 'test_xml_episode1.xml'
 xml_file = file_path + file_to_parse
