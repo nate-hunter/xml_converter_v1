@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Package>
+  <UID>
+    <root_filename>AxMen_ManDown</root_filename>
+    <format>HD</format>
+    <amazon_title>Ax Men Season null</amazon_title>
+    <release_indemand>1</release_indemand>
+  </UID>
+  <Series>Ax Men</Series>
+  <Season>10</Season>
+  <Title>Man Down</Title>
+  <EpisodeNumber>8</EpisodeNumber>
+  <Description>Rygaard Logging races to complete four settings and three yarder moves in a single day so they can stay on schedule and on budget.</Description>
+  <SeasonDescription>Ax Men is back with a new season featuring fan-favorite crews and several new logging companies. Facing an industry in flux, loggers across America are putting everything they have on the line to pull through and keep their businesses afloat. The new season will feature a completely overhauled look and feel bringing fans closer to the characters and the environments they’ve come to love.</SeasonDescription>
+  <Actor1>N/A</Actor1>
+  <Actor2>N/A</Actor2>
+  <Director>N/A</Director>
+  <BoxOffice>N/A</BoxOffice>
+  <Rating>TV-PG</Rating>
+  <Genre>Documentaries</Genre>
+  <Duration>01:00:00</Duration>
+  <ClosedCaption>Y</ClosedCaption>
+  <ReleaseYear>2019</ReleaseYear>
+  <OriginalAirDate>08/29/19</OriginalAirDate>
+  <SalesStartDate>08/30/19</SalesStartDate>
+  <Keywords>Ax Men, Man Down, four settings, ice-covered, budget</Keywords>
+  <Video>
+    <file_name>AETN-222627PAR_THC_AXMN_S010-FULL-Mezz_HD-en-US-ManDown_-v202004242259.mov</file_name>
+    <frameRate>29.97</frameRate>
+    <aspectRatio>16:9</aspectRatio>
+  </Video>
+</Package>
