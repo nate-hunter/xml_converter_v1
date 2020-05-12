@@ -1,13 +1,14 @@
 import lxml.etree as etree
 
-file_path = 'C:\\Users\\laway\\Desktop\\iNDEMAND\\misc\\py_projects\\xml_to_csv\\project_repos\\xml_converter_v1\\xml_files\\'
-file_to_parse = 'test_xml_episode1.xml'
-xml_file = file_path + file_to_parse
+
+file_to_parse = '.\\xml_files\\test_xml_episode1.xml'
+xml_file = file_to_parse
 # print(xml_file)
 
 
 open_xml = open(xml_file).read()
 # print(open_xml)
+
 
 root = etree.fromstring(open_xml)
 # print(root.tag)
@@ -24,5 +25,6 @@ def print_xml_tags(root):
             else:
                 print(child.tag + ':')
                 print('\t' + child.text)
+
 
 print_xml_tags(root)
