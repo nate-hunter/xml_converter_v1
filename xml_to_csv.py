@@ -1,36 +1,37 @@
 import lxml.etree as etree
 
 
-file_to_parse = '.\\xml_files\\test_xml_episode1.xml'
-xml_file = file_to_parse
-# print(xml_file)
+def create_data_dict(xml_to_parse):
+    with open(xml_to_parse) as f:
+        open_xml = f.read()
 
+    root = etree.fromstring(open_xml)
 
-open_xml = open(xml_file).read()
-# print(open_xml)
+    data_dict = {
+        'Series': '',
+        'Season': '',
+        'Title': '',
+        'EpisodeNumber': '',
+        'Description': '',
+        'SeasonDescription': '',
+        'Actor1': '',
+        'Actor2': '',
+        'Rating': '',
+        'Genre': '',
+        'Duration': '',
+        'ReleaseYear': ''
+    }
 
-
-root = etree.fromstring(open_xml)
-# print(root.tag)
-
-
-data_dict = {}
-
-# FUNCTION TO PRINT XML TAGS
-
-
-def print_xml_tags(root):
     for child in root.getchildren():
         if not child.text == 'N/A':
-            data_dict[child.tag] = child.text
-        # if child.tag == 'Description' or child.tag == 'SeasonDescription':
-        #     print(child.tag + ':  (Character Length: ' +
-        #           str(len(child.text)) + ')')
-        #     print('\t' + child.text)
-        # else:
-        #     print(child.tag + ':')
-        #     print('\t' + child.text)
-    print(data_dict)
+            if child.tag in data_dict:
+                data_dict[child.tag] = child.text
+    return data_dict
+
+
+xml_to_parse = '.\\xml_files\\test_xml_episode1.xml'
+
 
 if __name__ == '__main__':
-    print_xml_tags(root)
+    data = create_data_dict(xml_to_parse)
+    print(data)
