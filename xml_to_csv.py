@@ -1,4 +1,5 @@
 import lxml.etree as etree
+import csv
 
 
 def create_data_dict(xml_to_parse):
@@ -29,9 +30,21 @@ def create_data_dict(xml_to_parse):
     return data_dict
 
 
+def write_to_csv(filename, data):
+    columns = []
+
+    for k in data:
+        columns.append(k)
+
+    with open(filename, 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=columns)
+        writer.writeheader()
+        writer.writerow(data)
+
+
 xml_to_parse = '.\\xml_files\\test_xml_episode1.xml'
 
 
 if __name__ == '__main__':
     data = create_data_dict(xml_to_parse)
-    print(data)
+    write_to_csv('csv_output.csv', data)
