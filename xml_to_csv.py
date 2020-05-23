@@ -6,7 +6,7 @@ import os
 def create_ae_data_dict(xml_to_parse):
     # DATA PROVIDED BY A&E
 
-    with open(xml_to_parse, encoding='utf-8') as f:
+    with open(xml_to_parse, 'rb') as f:
         open_xml = f.read()
 
     root = etree.fromstring(open_xml)
@@ -75,26 +75,53 @@ def create_disney_data_dict(xml_to_parse):
 
 def create_discovery_data_dict(xml_to_parse):
     # NEXT STUDIO TO SETUP
+    with open(xml_to_parse, 'rb') as f:
+        open_xml = f.read()
+
+    root = etree.fromstring(open_xml)
+
+    data_dict = {
+        'series_name': '',
+        'season_title': '',
+        'container_position': '',
+        'title': '',
+        'release_date': '',
+        'season_description': '',
+        'description': '',
+        'genre': '',
+        'rating': '',
+        'duration': ''
+    }
+
+    for key in data_dict:
+        for child in root.getchildren():
+            k = "{http://apple.com/itunes/importer}" + key
+            for ch in child.iter(k):
+                tag = ch.tag.split("}")[1]
+                data_dict[tag] = ch.text
+
+    return data_dict
 
 
 def process_directory(directory, studio):
     """ TAKES A DIRECTORY OF XML METADATA AND OUTPUTS A LIST WHICH IS USED BY `write_to_csv()`."""
-
     list_data = []
     for filename in os.listdir(directory):
         if filename.endswith(".xml"):
             file = os.path.join(directory, filename)
-            if studio == "A&E":
+            if studio.lower() == "a&e":
                 ae_dict = create_ae_data_dict(file)
                 list_data.append(ae_dict)
-            elif studio == "Disney":
-                # print("disney studio")
+            elif studio.lower() == "disney":
                 disney_dict = create_disney_data_dict(file)
-                # print(disney_dict)
                 list_data.append(disney_dict)
+            elif studio.lower() == 'discovery':
+                discovery_dict = create_discovery_data_dict(file)
+                list_data.append(discovery_dict)
             else:
-                print(studio + " is not set up to convert XMLs to CSV at this time.")
-
+                print("- '" + studio +
+                      "' is not set up to convert XMLs to CSV at this time.")
+                break
     return list_data
 
 
@@ -120,13 +147,27 @@ def write_to_csv(filename, data):
             writer.writerow(row)
 
 
-if __name__ == '__main__':
-    # test_ae_directory = '.\\xml_files'
-    # ae_data = process_directory(test_ae_directory, "A&E")
-    # write_to_csv('csv_output.csv', ae_data)
+def run_command_line():
+    directory = input("Please enter the files' directory:  ")
+    studio = input("Please enter a studio: ")
 
-    thirty_for_thirty_directory = 'C:\\Users\\laway\\Box\\EST & Streampix\\Metadata By Month\\2020\\6. June\\TV\\Disney\\30 For 30'
-    disney_data = process_directory(thirty_for_thirty_directory, "Disney")
-    output_file_name = '\\_compiled_XMLs_' + \
-        thirty_for_thirty_directory.split('\\')[-1] + '.csv'
-    write_to_csv(thirty_for_thirty_directory + output_file_name, disney_data)
+    data = process_directory(directory, studio)
+
+    output_file = '_compiled_XMLs_' + directory.split('\\')[-1] + '.csv'
+
+    try:
+        write_to_csv(directory + '\\' + output_file, data)
+        print("|============|")
+        print("|  Success!  |")
+        print("|============|")
+        print("\n+ Check for file: '" + output_file + "'")
+        print("  by following the path: '" + directory + "'")
+    except Exception as e:
+        print("\n!!! Failed to write CSV !!!")
+        print(e)
+
+if __name__ == '__main__':
+    try:
+        run_command_line()
+    except Exception as e:
+        print(e)

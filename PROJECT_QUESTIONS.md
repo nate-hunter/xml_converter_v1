@@ -10,3 +10,5 @@
 * How to write cleaner code?
 * How to utilize `lxml` better?
 * How to get attributes of an XML element?
+* How to better organize code/methods?
+* How to better adhere to Python best practices?
