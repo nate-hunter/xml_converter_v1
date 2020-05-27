@@ -1,5 +1,4 @@
-# Below are questions I've come across during this project so far.
-
+# QUESTIONS:
 * Should I be using a virtual environment?
 * How to read XML files with a declaration?
 	- SOLUTION:	`with open(xml_to_parse, 'rb') as f:
@@ -11,7 +10,5 @@
 * How to write cleaner code?
 * How to utilize `lxml` better?
 * How to get attributes of an XML element?
-	- SOLUTION: `.get("attribute_name")`
 * How to better organize code/methods?
 * How to better adhere to Python best practices?
-* Am I violating any no-no's?
